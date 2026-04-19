@@ -1,16 +1,41 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { SiteHeader } from "@/components/SiteHeader";
+import { Hero } from "@/components/Hero";
+import { Services } from "@/components/Services";
+import { Gallery } from "@/components/Gallery";
+import { Reviews } from "@/components/Reviews";
+import { Visit } from "@/components/Visit";
+import { BookingSection } from "@/components/BookingSection";
+import { SiteFooter } from "@/components/SiteFooter";
+import { useEffect } from "react";
+import { SALON } from "@/lib/salon-data";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  useEffect(() => {
+    document.title = `${SALON.name} — Beauty Salon in Monterrey`;
+    const meta = document.querySelector('meta[name="description"]');
+    const desc = `${SALON.name} in Monterrey: hair, nails, facials & makeup. ${SALON.rating}★ from ${SALON.reviewsCount} reviews. Book online today.`;
+    if (meta) meta.setAttribute("content", desc);
+    else {
+      const m = document.createElement("meta");
+      m.name = "description"; m.content = desc;
+      document.head.appendChild(m);
+    }
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div className="min-h-screen bg-background text-foreground">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <Services />
+        <Gallery />
+        <Reviews />
+        <Visit />
+        <BookingSection />
+      </main>
+      <SiteFooter />
     </div>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
